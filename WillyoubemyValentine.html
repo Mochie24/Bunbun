@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Invitation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ffeff3 url('https://i.pinimg.com/736x/4c/27/ef/4c27efcf9ee48bba5edc20686a11250f.jpg') no-repeat center center/cover;
+            flex-direction: column;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            overflow: hidden;
+            margin: 0;
+        }
+        .envelope {
+            width: 220px;
+            height: 140px;
+            background: #f5deb3;
+            position: relative;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8b0000;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #b5651d;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        .message-box {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+            border: 2px solid #ff99cc;
+        }
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .buttons button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .buttons button:first-child {
+            background: #ff4d6d;
+            color: white;
+        }
+        .buttons button:first-child:hover {
+            background: #c9184a;
+            box-shadow: 0 5px 15px rgba(255,77,109,0.4);
+        }
+        .no-btn {
+            background: #cccccc;
+            color: white;
+        }
+        .no-btn:hover {
+            background: #999999;
+            transform: scale(0.95);
+        }
+        .sweet-message {
+            display: none;
+            font-size: 24px;
+            color: #ff4d6d;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            border: 2px solid #ffb3c1;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="openEnvelope()">💌 Click to Open</div>
+    <div class="message-box" id="messageBox">
+        <p style="font-size: 24px; margin-bottom: 20px;">My Dearest Bunbun,<br>Will you be my Valentine? 🌹❤️</p>
+        <div class="buttons">
+            <button onclick="acceptLove()">Absolutely Yes!</button>
+            <button class="no-btn" onclick="rejectLove()" id="noButton">Not Sure</button>
+        </div>
+    </div>
+    <div class="sweet-message" id="sweetMessage">
+        💖 Yay! You've made Bebear the happiest! 💖<br>
+        You mean the world to me! 🌍✨<br>
+        Let's make beautiful memories together! 🌸📸
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.querySelector(".envelope").style.display = "none";
+            document.getElementById("messageBox").style.display = "block";
+            document.body.style.backgroundBlendMode = 'multiply';
+        }
+        
+        function acceptLove() {
+            document.getElementById("messageBox").style.display = "none";
+            document.getElementById("sweetMessage").style.display = "block";
+            launchConfetti();
+            document.body.style.background = '#ffeff3 url("https://i.pinimg.com/originals/1a/3a/bf/1a3abfad00b265384e1387cbc88cd5d0.gif") no-repeat center center/cover';
+        }
+
+        function rejectLove() {
+            let noBtn = document.getElementById("noButton");
+            let messages = [
+                "Are you certain? 🥺",
+                "Maybe reconsider? 😢",
+                "Pretty please? 💕",
+                "My heart is fragile 💔",
+                "Try again? 🥀",
+                "You sure? 😭",
+                "I'll be sad 😞",
+                "Give me a chance 🌸"
+            ];
+            let index = Math.floor(Math.random() * messages.length);
+            noBtn.innerText = messages[index];
+            let maxX = window.innerWidth - 150;
+            let maxY = window.innerHeight - 100;
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
+            noBtn.style.transform = `translate(${x - window.innerWidth/2}px, ${y - window.innerHeight/2}px)`;
+            noBtn.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)';
+        }
+        
+        function launchConfetti() {
+            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffd7ba'];
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
