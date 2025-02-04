@@ -112,7 +112,7 @@
 <body>
     <div class="envelope" onclick="openEnvelope()">💌 Click to Open</div>
     <div class="message-box" id="messageBox">
-        <p style="font-size: 24px; margin-bottom: 20px;">My Dearest Bunbun,<br>Will you be my Valentine? 🌹❤️</p>
+        <p style="font-size: 24px; margin-bottom: 20px;">My Lovie Bunbun,<br>Will you be my Valentine? 🌹❤️</p>
         <div class="buttons">
             <button onclick="acceptLove()">Absolutely Yes!</button>
             <button class="no-btn" onclick="rejectLove()" id="noButton">Not Sure</button>
@@ -120,7 +120,7 @@
     </div>
     <div class="sweet-message" id="sweetMessage">
         💖 Yay! You've made Bebear the happiest! 💖<br>
-        You mean the world to me! 🌍✨<br>
+        It's a date with my pretty girl✨<br>
         Let's make beautiful memories together! 🌸📸
     </div>
 
@@ -141,14 +141,14 @@
         function rejectLove() {
             let noBtn = document.getElementById("noButton");
             let messages = [
-                "Are you certain? 🥺",
+                "Are you sure? 🥺",
                 "Maybe reconsider? 😢",
                 "Pretty please? 💕",
-                "My heart is fragile 💔",
+                "My heart will break 💔",
                 "Try again? 🥀",
-                "You sure? 😭",
-                "I'll be sad 😞",
-                "Give me a chance 🌸"
+                "You'll make me cry? 😭",
+                "Click yes instead 😞",
+                "Give me a chance pweaaaaseee🌸"
             ];
             let index = Math.floor(Math.random() * messages.length);
             noBtn.innerText = messages[index];
